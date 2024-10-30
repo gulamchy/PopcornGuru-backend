@@ -22,8 +22,15 @@ let similarity = [];
 const loadDataFromGCS = async () => {
   try {
     console.log("Attempting to load movies from GCS...");
-    movies = await readFileContent("movie.json");
-    similarity = await readFileContent("similarity.json");
+    // Check if data is already loaded
+    if (movies.length === 0 && similarity.length === 0) {
+      const [moviesData, similarityData] = await Promise.all([
+        readFileContent("movie.json"),
+        readFileContent("similarity.json")
+      ]);
+      movies = moviesData;
+      similarity = similarityData;
+    }
   } catch (error) {
     console.error("Error loading data from GCS:", error);
     throw new Error("Failed to load data");

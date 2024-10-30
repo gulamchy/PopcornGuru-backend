@@ -18,16 +18,18 @@ const bucketName = "popcornmovie";
 async function readFileContent(fileName, lineNumber = null) {
   try {
     const file = storage.bucket(bucketName).file(fileName);
+    const [contents] = await file.download();
 
+    const data = JSON.parse(contents.toString("utf-8"));
+
+    // If lineNumber is provided and the file is "similarity.json", return specific line
     if (lineNumber !== null && fileName === "similarity.json") {
-      const [contents] = await file.download();
-      const data = JSON.parse(contents.toString("utf-8"));
-
       return data[lineNumber] || [];
-    } else {
-      const [contents] = await file.download();
-      return JSON.parse(contents.toString("utf-8"));
     }
+
+    // For all other cases, return the full data
+    return data;
+
   } catch (error) {
     console.error(`Error reading file ${fileName}:`, error);
     throw new Error("Failed to read file from GCS");
