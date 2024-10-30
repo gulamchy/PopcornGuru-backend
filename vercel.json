@@ -1,18 +1,12 @@
 {
   "version": 2,
   "name": "PopcornGuru-backend",
-  "builds": [
-    {
-      "src": "index.js",
-      "use": "@vercel/node"
+  "functions": {
+    "api/index.js": {
+      "memory": 512,
+      "maxDuration": 10
     }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "index.js"
-    }
-  ],
+  },
   "headers": [
     {
       "source": "/api/(.*)",
@@ -21,7 +15,7 @@
           "key": "Access-Control-Allow-Origin",
           "value": "https://popcorn-guru-frontend.vercel.app"
         },
-        { "key": "Access-Control-Allow-Methods", "value": "POST,GET,OPTIONS" }
+        { "key": "Access-Control-Allow-Methods", "value": "POST,GET" }
       ]
     }
   ]
