@@ -3,7 +3,7 @@
   "name": "PopcornGuru-backend",
   "builds": [
     {
-      "src": "*.js",
+      "src": "index.js",
       "use": "@vercel/node"
     }
   ],
