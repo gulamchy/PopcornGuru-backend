@@ -8,20 +8,47 @@ require("dotenv").config();
 const app = express();
 app.use(express.json());
 
-const allowedOrigins = [process.env.FRONTEND_URL, "http://localhost:5173"];
+// const allowedOrigins = [process.env.FRONTEND_URL, "http://localhost:5173"];
+// app.use(cors({
+//   origin: allowedOrigins,
+//   methods: ["POST", "GET"],
+//   credentials: true,
+// }))
+
+const allowedOrigins = [process.env.FRONTEND_URL || "http://localhost:5173"];
+
+// Set up CORS with specified origins and credentials
 app.use(cors({
-  origin: allowedOrigins,
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   methods: ["POST", "GET"],
   credentials: true,
-}))
+}));
 
 
 
 let movies = [];
 let similarity = [];
 
+// const loadDataFromGCS = async () => {
+//   try {
+//     movies = await readFileContent("movie.json");
+//     similarity = await readFileContent("similarity.json");
+//   } catch (error) {
+//     console.error("Error loading data from GCS:", error);
+//     throw new Error("Failed to load data");
+//   }
+// };
+
 const loadDataFromGCS = async () => {
   try {
+    console.log("Attempting to load movies from GCS...");
     movies = await readFileContent("movie.json");
     similarity = await readFileContent("similarity.json");
   } catch (error) {
@@ -75,12 +102,24 @@ const getRecommendations = async (movieTitle) => {
     .map((item) => item.movie);
 };
 
-app.get("/movies", (req, res) => {
+// app.get("/movies", (req, res) => {
+//   if (movies.length === 0) {
+//     return res.status(500).json({ error: "Movie data is not loaded" });
+//   }
+//   res.json(movies);
+// });
+
+app.get("/movies", async (req, res) => {
   if (movies.length === 0) {
-    return res.status(500).json({ error: "Movie data is not loaded" });
+    try {
+      await loadDataFromGCS();
+    } catch (error) {
+      return res.status(500).json({ error: "Failed to load data" });
+    }
   }
   res.json(movies);
 });
+
 
 app.post("/recommend", async (req, res) => {
   const { movieTitle } = req.body;
