@@ -1,13 +1,15 @@
 {
   "version": 2,
   "functions": {
-    "/index.js": {
-      "maxDuration": 30,
+    "api/index.js": {
+      "maxDuration": 60,
       "memory": 1024
     }
   },
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.js" }
+    { "source": "/movies", "destination": "/api/index.js" },
+    { "source": "/recommend", "destination": "/api/index.js" },
+    { "source": "/(.*)", "destination": "/api/index.js" }  
   ],
   "headers": [
     {
@@ -19,11 +21,11 @@
         },
         {
           "key": "Access-Control-Allow-Methods",
-          "value": "GET,POST,PUT,DELETE"
+          "value": "GET, POST, PUT, DELETE"
         },
         {
           "key": "Access-Control-Allow-Headers",
-          "value": "Content-Type,Authorization"
+          "value": "Content-Type, Authorization"
         }
       ]
     }
