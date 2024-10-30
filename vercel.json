@@ -2,20 +2,23 @@
   "version": 2,
   "name": "PopcornGuru-backend",
   "functions": {
-    "api/*.js": {
+    "*.js": {
       "memory": 512,
       "maxDuration": 30
     }
   },
   "headers": [
     {
-      "source": "/api/(.*)",
+      "source": "/(.*)",  
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
           "value": "https://popcorn-guru-frontend.vercel.app"
         },
-        { "key": "Access-Control-Allow-Methods", "value": "POST,GET" }
+        { 
+          "key": "Access-Control-Allow-Methods", 
+          "value": "POST,GET" 
+        }
       ]
     }
   ]
