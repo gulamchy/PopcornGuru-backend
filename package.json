@@ -1,0 +1,26 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "A backend service for movie recommendations using Google Cloud Storage.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon",
+    "start": "node index.js",
+    "test": "jest",
+    "build": "npm install"
+  },
+  "keywords": [],
+  "author": "Gulam Sulaman",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/storage": "^7.13.0",
+    "axios": "^1.7.7",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
