@@ -1,15 +1,19 @@
 {
   "version": 2,
   "name": "PopcornGuru-backend",
-  "functions": {
-    "api/*.js": {
-      "memory": 512,
-      "maxDuration": 30
+  "builds": [
+    {
+      "src": "*.js",
+      "use": "@vercel/node",
+      "config": {
+        "memory": 512,
+        "maxDuration": 30
+      }
     }
-  },
+  ],
   "headers": [
     {
-      "source": "/api/(.*)",
+      "source": "/(.*)",
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
