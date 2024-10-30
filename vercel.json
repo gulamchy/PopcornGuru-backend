@@ -7,6 +7,7 @@
       "use": "@vercel/node"
     }
   ],
+  "rewrites": [{ "source": "/(.*)", "destination": "index.js" }],
   "headers": [
     {
       "source": "/(.*)",
@@ -15,9 +16,9 @@
           "key": "Access-Control-Allow-Origin",
           "value": "https://popcorn-guru-frontend.vercel.app"
         },
-        { 
-          "key": "Access-Control-Allow-Methods", 
-          "value": "POST,GET" 
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "POST,GET"
         }
       ]
     }
