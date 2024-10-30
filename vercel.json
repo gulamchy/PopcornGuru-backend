@@ -2,9 +2,9 @@
   "version": 2,
   "name": "PopcornGuru-backend",
   "functions": {
-    "api/index.js": {
+    "api/*.js": {
       "memory": 512,
-      "maxDuration": 10
+      "maxDuration": 30
     }
   },
   "headers": [
