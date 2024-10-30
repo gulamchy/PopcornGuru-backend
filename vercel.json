@@ -2,15 +2,16 @@
   "version": 2,
   "name": "PopcornGuru-backend",
   "functions": {
-    "index.js": {
-      "maxDuration": 30,
-      "memory": 4096
-    }
+    "api/index.js": {
+      "maxDuration": 30, 
+      "memory": 1024 
   },
-  "rewrites": [{ "source": "/(.*)", "destination": "index.js" }],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/api/index.js" } 
+  ],
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/api/(.*)",
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
