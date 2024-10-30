@@ -5,22 +5,22 @@
     "api/index.js": {
       "maxDuration": 30,
       "memory": 1024
-    },
-    "rewrites": [{ "source": "/(.*)", "destination": "/api/index.js" }],
-    "headers": [
-      {
-        "source": "/api/(.*)",
-        "headers": [
-          {
-            "key": "Access-Control-Allow-Origin",
-            "value": "https://popcorn-guru-frontend.vercel.app"
-          },
-          {
-            "key": "Access-Control-Allow-Methods",
-            "value": "POST,GET"
-          }
-        ]
-      }
-    ]
-  }
+    }
+  },
+  "rewrites": [{ "source": "/(.*)", "destination": "/api/index.js" }],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://popcorn-guru-frontend.vercel.app"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "POST,GET"
+        }
+      ]
+    }
+  ]
 }
