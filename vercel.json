@@ -1,12 +1,6 @@
 {
   "version": 2,
   "name": "PopcornGuru-backend",
-  "builds": [
-    {
-      "src": "index.js",
-      "use": "@vercel/node"
-    }
-  ],
   "functions": {
     "index.js": {
       "maxDuration": 30
