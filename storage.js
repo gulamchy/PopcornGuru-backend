@@ -5,10 +5,11 @@ require("dotenv").config();
 
 const base64Key = process.env.GOOGLE_CLOUD_STORAGE_KEY;
 const keyJson = Buffer.from(base64Key, 'base64').toString('utf-8');
-const keyFilename = JSON.parse(keyJson);
+const credentials = JSON.parse(keyJson);
+
 
 const storage = new Storage({
-  keyFilename: keyFilename,
+  credentials: credentials,
   projectId: "elegant-moment-440103-f0",
 });
 
